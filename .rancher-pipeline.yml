@@ -27,7 +27,7 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: ./nginx
       tag: nginx:${CICD_EXECUTION_SEQUENCE}
- - name: Publish image varnish
+- name: Publish image varnish
   steps: 
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
