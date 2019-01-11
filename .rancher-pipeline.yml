@@ -15,12 +15,27 @@ stages:
         php artisan migrate --env=testing --database=sqlite_testing --force
         ./vendor/bin/codecept build
         ./vendor/bin/codecept run
-- name: Publish image
+- name: Publish image php-fpm
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: php-example:${CICD_EXECUTION_SEQUENCE}
+      buildContext: ./7.2-fpm
+      tag: php-fpm:${CICD_EXECUTION_SEQUENCE}
+- name: Publish image nginx
+  steps: 
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: ./nginx
+      tag: nginx:${CICD_EXECUTION_SEQUENCE}
+ - name: Publish image varnish
+  steps: 
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: ./varnish
+      tag: varnish:${CICD_EXECUTION_SEQUENCE}
+- 
+
+
 - name: Deploy
   steps:
   - applyYamlConfig:
