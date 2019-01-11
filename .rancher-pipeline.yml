@@ -33,9 +33,6 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: ./varnish
       tag: varnish:${CICD_EXECUTION_SEQUENCE}
-- 
-
-
 - name: Deploy
   steps:
   - applyYamlConfig:
